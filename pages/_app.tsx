@@ -36,16 +36,14 @@ function MyApp({ Component, pageProps }: AppProps) {
 			<Script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/MotionPathPlugin.min.js' />
 			<Script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/TextPlugin.min.js' />
 
-			<noscript id='noscript-analytics'>
-				{/* NoScript yandex analytics */}
-				<div>
-					<img
-						src='https://mc.yandex.ru/watch/87442287'
-						style={{ position: 'absolute', left: '-9999px' }}
-						alt=''
-					/>
-				</div>
-			</noscript>
+			{/* NoScript yandex analytics */}
+			<div>
+				<img
+					src='https://mc.yandex.ru/watch/87442287'
+					style={{ position: 'absolute', left: '-9999px' }}
+					alt=''
+				/>
+			</div>
 
 			<Component {...pageProps} />
 		</>
