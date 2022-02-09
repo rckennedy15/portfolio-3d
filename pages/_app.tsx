@@ -13,6 +13,18 @@ function MyApp({ Component, pageProps }: AppProps) {
 					content='Hire a Professional Freelance Web Developer. Building clean, animated, and interactive experiences with a focus on security and ethics.'
 				/>
 				<link rel='icon' href='/favicon.ico' />
+
+				{/* Google Fonts */}
+				<link rel='preconnect' href='https://fonts.googleapis.com' />
+				<link
+					rel='preconnect'
+					href='https://fonts.gstatic.com'
+					crossOrigin='true'
+				/>
+				<link
+					href='https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Indie+Flower&family=M+PLUS+Rounded+1c:wght@300&family=Raleway:wght@300&family=Ubuntu+Mono&display=swap'
+					rel='stylesheet'
+				/>
 			</Head>
 			{/* Yandex analytics */}
 			<Script id='analytics' type='text/javascript'>{`
@@ -36,14 +48,16 @@ function MyApp({ Component, pageProps }: AppProps) {
 			<Script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/MotionPathPlugin.min.js' />
 			<Script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/TextPlugin.min.js' />
 
-			{/* NoScript yandex analytics */}
-			<div>
-				<img
-					src='https://mc.yandex.ru/watch/87442287'
-					style={{ position: 'absolute', left: '-9999px' }}
-					alt=''
-				/>
-			</div>
+			<noscript id='noscript-analytics'>
+				{/* NoScript yandex analytics */}
+				<div>
+					<img
+						src='https://mc.yandex.ru/watch/87442287'
+						style={{ position: 'absolute', left: '-9999px' }}
+						alt=''
+					/>
+				</div>
+			</noscript>
 
 			<Component {...pageProps} />
 		</>
