@@ -35,6 +35,7 @@ const Home: NextPage = () => {
 				duration: 1,
 				y: '4.5rem',
 				ease: 'power3.out',
+				// @ts-ignore
 				onComplete: () => mainTl.play(),
 			});
 
