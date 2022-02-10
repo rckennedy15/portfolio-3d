@@ -36,7 +36,7 @@ const Home: NextPage = () => {
 
 	return (
 		<>
-			<section className='flex flex-col items-center justify-center justify-items-center h-screen w-screen bg-zinc-300'>
+			<section className='flex flex-col items-center justify-center justify-items-center h-screen w-screen bg-zinc-300 overflow-hidden'>
 				<div className='grow w-full flex items-center justify-center'>
 					<h1 className='text-center text-6xl'>COMING SOON</h1>
 				</div>
@@ -45,25 +45,31 @@ const Home: NextPage = () => {
 						<h2 className='text-center text-white text-[6vw]'>
 							{timeLeft.days}
 						</h2>
-						<h3 className='text-center text-white text-2xl'>days</h3>
+						<h3 className='text-center text-white text-xl md:text-2xl'>days</h3>
 					</div>
 					<div className='rounded-lg bg-slate-500 flex flex-col items-center justify-center overflow-hidden'>
 						<h2 className='text-center text-white text-[6vw]'>
 							{timeLeft.hours}
 						</h2>
-						<h3 className='text-center text-white text-2xl'>hours</h3>
+						<h3 className='text-center text-white text-xl md:text-2xl'>
+							hours
+						</h3>
 					</div>
 					<div className='rounded-lg bg-slate-500 flex flex-col items-center justify-center overflow-hidden'>
 						<h2 className='text-center text-white text-[6vw]'>
 							{timeLeft.minutes}
 						</h2>
-						<h3 className='text-center text-white text-2xl'>minutes</h3>
+						<h3 className='text-center text-white text-xl md:text-2xl'>
+							minutes
+						</h3>
 					</div>
 					<div className='rounded-lg bg-slate-500 flex flex-col items-center justify-center overflow-hidden'>
 						<h2 className='text-center text-white text-[6vw]'>
 							{timeLeft.seconds}
 						</h2>
-						<h3 className='text-center text-white text-2xl'>seconds</h3>
+						<h3 className='text-center text-white text-xl md:text-2xl'>
+							seconds
+						</h3>
 					</div>
 				</div>
 				<div className='grow w-full flex items-center justify-center'>
