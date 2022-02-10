@@ -8,16 +8,12 @@ module.exports = {
 	theme: {
 		extend: {
 			fontFamily: {
-				sans: [
-					'M\\ PLUS\\ Rounded\\ 1c',
-					'Raleway',
-					'Ubuntu\\ Mono',
-					'Architects\\ Daughter',
-					'Indie\\ Flower',
-					...defaultTheme.fontFamily.sans,
-				],
-				title: ['Ubuntu Mono'],
-				titlee: ['M PLUS Rounded 1c'],
+				sans: ['M\\ PLUS\\ Rounded\\ 1c', ...defaultTheme.fontFamily.sans],
+				mono1: ['Ubuntu\\ Mono'],
+				mono2: ['Raleway'],
+				main: ['M\\ PLUS\\ Rounded\\ 1c'],
+				handwritten1: ['Architects\\ Daughter'],
+				handwritten2: ['Indie\\ Flower'],
 			},
 		},
 	},

@@ -41,12 +41,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 			`}</Script>
 
 			{/* GSAP libraries from CDN */}
-			<Script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js' />
+			{/* <Script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js' />
 			<Script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/Flip.min.js' />
 			<Script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js' />
 			<Script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollToPlugin.min.js' />
 			<Script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/MotionPathPlugin.min.js' />
-			<Script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/TextPlugin.min.js' />
+			<Script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/TextPlugin.min.js' /> */}
 
 			<noscript id='noscript-analytics'>
 				{/* NoScript yandex analytics */}
