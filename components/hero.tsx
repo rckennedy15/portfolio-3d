@@ -26,6 +26,7 @@ const Hero: FC = () => {
 			duration: 0.9,
 		});
 
+		// on load animation
 		const initTl = gsap.timeline();
 		initTl
 			.from(hero1.current, {
@@ -40,22 +41,31 @@ const Hero: FC = () => {
 				// @ts-ignore
 				onComplete: () => mainTl.play(),
 			});
-
 		initTl.on;
 
+		// typing animation
 		const mainTl = gsap.timeline({ repeat: -1 }).pause();
 		words.forEach((word) => {
 			let tl = gsap.timeline({ repeat: 1, yoyo: true, repeatDelay: 2 });
-			tl.to(text.current, {
-				duration: 1.2,
-				text: word,
-				ease: 'sine.in',
-			});
+			if (word == 'an ethical programmer.') {
+				tl.to(text.current, {
+					duration: 1.6,
+					text: word,
+					ease: 'sine.in',
+				});
+			} else {
+				tl.to(text.current, {
+					duration: 1.2,
+					text: word,
+					ease: 'sine.in',
+				});
+			}
 			mainTl.add(tl);
 		});
 	});
+
 	return (
-		<div className='p-8'>
+		<div className='px-8 py-16 z-0'>
 			<div>
 				<h1 className='text-7xl text-white font-handwritten2 overflow-hidden'>
 					<span ref={hero1} className='inline-block'>
@@ -69,7 +79,7 @@ const Hero: FC = () => {
 				</h1>
 			</div>
 			<div className='pt-16'>
-				<h4 className='text-3xl text-white font-mono2 overflow-hidden'>
+				<h4 className='text-3xl text-white font-mono2 overflow-hidden whitespace-nowrap text-ellipsis'>
 					<span ref={text} className='inline-block'></span>
 					<span ref={cursor}>_</span>
 				</h4>
