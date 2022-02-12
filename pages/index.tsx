@@ -5,9 +5,37 @@ import MobileMenu from '../components/mobile-menu';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/dist/ScrollToPlugin';
+import { useEffect } from 'react';
 
 const Home: NextPage = () => {
 	gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+	useEffect(() => {
+		let sections = gsap.utils.toArray<gsap.DOMTarget>('section');
+		sections.forEach((section, i) => {
+			ScrollTrigger.create({
+				trigger: section,
+				start: 'top bottom',
+				onEnter: () => goToSection(i),
+			});
+			ScrollTrigger.create({
+				trigger: section,
+				start: 'bottom bottom',
+				onEnterBack: () => goToSection(i),
+			});
+		});
+	});
+
+	const goToSection = (i: number) => {
+		gsap.to(window, {
+			scrollTo: {
+				y: i * innerHeight,
+			},
+			duration: 0.8,
+			ease: 'power2.inOut',
+		});
+	};
+
 	return (
 		<>
 			<section id='home' className='bg-zinc-800 h-screen'>
