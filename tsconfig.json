@@ -15,6 +15,7 @@
 		"jsx": "preserve",
 		"incremental": true,
 		"typeRoots": ["./node_modules/@types", "./types"],
+		"baseUrl": ".",
 		"paths": {
 			"@fullpage/*": ["fullpage__*"]
 		}
