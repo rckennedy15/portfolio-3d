@@ -29,19 +29,32 @@ const Hero: FC = () => {
 		// on load animation
 		const initTl = gsap.timeline();
 		initTl
-			.from(hero1.current, {
-				duration: 1,
-				y: '4.5rem',
-				ease: 'power3.out',
-			})
-			.from(hero2.current, {
-				duration: 1,
-				y: '4.5rem',
-				ease: 'power3.out',
-				// @ts-ignore
-				onComplete: () => mainTl.play(),
-			});
-		initTl.on;
+			.delay(1)
+			.fromTo(
+				hero1.current,
+				{
+					y: '4.5rem',
+				},
+				{
+					duration: 1,
+					y: '0rem',
+					ease: 'power3.out',
+				}
+			)
+			.fromTo(
+				hero2.current,
+				{
+					y: '4.5rem',
+				},
+				{
+					duration: 1,
+					y: '0rem',
+					ease: 'power3.out',
+					// @ts-ignore
+					onComplete: () => mainTl.play(),
+				}
+			);
+		initTl.play();
 
 		// typing animation
 		const mainTl = gsap.timeline({ repeat: -1 }).pause();
