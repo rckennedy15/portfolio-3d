@@ -1,8 +1,19 @@
 import { Spin as Hamburger } from 'hamburger-react';
-import { FC, useEffect, useRef, useState } from 'react';
+import {
+	Dispatch,
+	FC,
+	SetStateAction,
+	useEffect,
+	useRef,
+	useState,
+} from 'react';
 import Link from '../components/mobile-menu-link';
 
-const MobileMenu: FC = () => {
+type MobileMenuProps = {
+	setAllowScroll: Dispatch<SetStateAction<boolean>>;
+};
+
+const MobileMenu = ({ setAllowScroll }: MobileMenuProps) => {
 	const blockMenu = useRef<HTMLDivElement>(null);
 	const darkBlur = useRef<HTMLDivElement>(null);
 
@@ -47,6 +58,7 @@ const MobileMenu: FC = () => {
 								blockMenu.current.style.visibility = 'visible';
 								darkBlur.current.style.visibility = 'visible';
 								document.body.style.position = 'fixed';
+								setAllowScroll(false);
 							}
 						} else {
 							// close menu
@@ -54,6 +66,7 @@ const MobileMenu: FC = () => {
 								blockMenu.current.style.visibility = 'hidden';
 								darkBlur.current.style.visibility = 'hidden';
 								document.body.style.position = 'static';
+								setAllowScroll(true);
 							}
 						}
 					}}

@@ -3,11 +3,12 @@ import Image from 'next/image';
 import Hero from '../components/hero';
 import MobileMenu from '../components/mobile-menu';
 import gsap from 'gsap';
-import { useEffect } from 'react';
-import ReactFullpage from '@fullpage/react-fullpage';
+import { useEffect, useState } from 'react';
+import ReactFullpage, { fullpageApi } from '@fullpage/react-fullpage';
 
 const Home: NextPage = () => {
 	const anchors = ['home', 'about', 'skills', 'work', 'contact'];
+	const [allowScroll, setAllowScroll] = useState(true);
 
 	return (
 		<>
@@ -19,10 +20,13 @@ const Home: NextPage = () => {
 				verticalCentered={false}
 				autoScrolling={true}
 				render={({ state, fullpageApi }) => {
+					if (fullpageApi != undefined) {
+						fullpageApi.setAllowScrolling(allowScroll);
+					}
 					return (
 						<ReactFullpage.Wrapper>
 							<div className='section bg-zinc-800'>
-								<MobileMenu />
+								<MobileMenu setAllowScroll={setAllowScroll} />
 								<Hero />
 							</div>
 							<div className='section bg-zinc-600'>
