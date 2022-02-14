@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import Script from 'next/script';
 import { useEffect, useState } from 'react';
 
 const Home: NextPage = () => {
@@ -36,6 +37,10 @@ const Home: NextPage = () => {
 
 	return (
 		<>
+			<Script
+				src='https://kit.fontawesome.com/31f00f1e88.js'
+				crossOrigin='anonymous'
+			/>
 			<section className='flex flex-col items-center justify-center justify-items-center h-screen w-screen bg-zinc-300 overflow-hidden'>
 				<div className='grow w-full flex items-center justify-center'>
 					<h1 className='text-center text-6xl'>COMING SOON</h1>
@@ -74,6 +79,9 @@ const Home: NextPage = () => {
 				</div>
 				<div className='grow w-full flex items-center justify-center'>
 					<p>Ⓒ Copyright 2022 Ryan Kennedy</p>
+					<a href='https://github.com/rckennedy15/portfolio-3d'>
+						<i className='fa-brands fa-github fa-xl pl-2'></i>
+					</a>
 				</div>
 			</section>
 		</>
