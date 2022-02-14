@@ -17,6 +17,7 @@ const Hero: FC = () => {
 		'a student.',
 		'an ethical programmer.',
 	];
+
 	useEffect(() => {
 		// cursor effect
 		gsap.to(cursor.current, {
@@ -75,7 +76,7 @@ const Hero: FC = () => {
 			}
 			mainTl.add(tl);
 		});
-	});
+	}, []);
 
 	return (
 		<div className='px-8 py-16 z-0'>
