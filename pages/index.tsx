@@ -16,11 +16,12 @@ const Home: NextPage = () => {
 	return (
 		<>
 			<ReactFullpage
-				// licenseKey={'key'}
+				licenseKey={'GPLv3OpenSourceLicense'}
 				navigation
 				navigationTooltips={anchors}
 				anchors={anchors}
 				verticalCentered={false}
+				autoScrolling={true}
 				render={({ state, fullpageApi }) => {
 					return (
 						<ReactFullpage.Wrapper>
