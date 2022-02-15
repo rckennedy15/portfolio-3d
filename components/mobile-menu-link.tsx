@@ -1,10 +1,17 @@
-import { FC } from 'react';
+type LinkProps = {
+	menuClose: () => void;
+	linkName: string;
+};
 
-const Link: FC<{ linkName: string }> = ({ linkName }) => {
+const Link = ({ menuClose, linkName }: LinkProps) => {
 	const linkDest = `#${linkName}`;
 	return (
 		<>
-			<a className='block text-white text-2xl' href={linkDest}>
+			<a
+				onClick={menuClose}
+				className='block text-white text-2xl'
+				href={linkDest}
+			>
 				{linkName}
 			</a>
 		</>

@@ -1,12 +1,6 @@
 import { Spin as Hamburger } from 'hamburger-react';
-import {
-	Dispatch,
-	FC,
-	SetStateAction,
-	useEffect,
-	useRef,
-	useState,
-} from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
 import Link from '../components/mobile-menu-link';
 
 type MobileMenuProps = {
@@ -16,8 +10,11 @@ type MobileMenuProps = {
 const MobileMenu = ({ setAllowScroll }: MobileMenuProps) => {
 	const blockMenu = useRef<HTMLDivElement>(null);
 	const darkBlur = useRef<HTMLDivElement>(null);
+	const link = useRef<HTMLDivElement>(null);
 
 	const [height, setHeight] = useState(0);
+	const [hamburgerToggle, setHamburgerToggle] = useState(false);
+	const [menuState, setMenuState] = useState(false);
 
 	useEffect(() => {
 		if (blockMenu.current != null) {
@@ -28,24 +25,96 @@ const MobileMenu = ({ setAllowScroll }: MobileMenuProps) => {
 	if (darkBlur.current != null)
 		darkBlur.current.style.top = `${height.toString()}px`;
 
+	const menuAnimOpenTl = gsap.timeline().pause();
+	menuAnimOpenTl
+		.fromTo(
+			blockMenu.current,
+			{
+				backgroundImage:
+					'radial-gradient(circle at 90% 2rem, rgb(113, 113, 122) 0%, transparent 0%)',
+			},
+			{
+				backgroundImage:
+					'radial-gradient(circle at 90% 2rem, rgb(14, 116, 144) 100%, transparent 0%)',
+				duration: 0.4,
+			},
+			'0'
+		)
+		.fromTo(
+			link.current,
+			{
+				opacity: 0,
+			},
+			{
+				duration: 0.2,
+				opacity: 1,
+			},
+			'0.2'
+		)
+		.fromTo(
+			darkBlur.current,
+			{
+				opacity: 0,
+			},
+			{
+				opacity: 1,
+				duration: 0.4,
+			},
+			'0.2'
+		)
+		.duration(0.4);
+
+	const toggleMenu = () => {
+		setMenuState(!menuState);
+		return new Promise((resolve, reject) => {
+			resolve('success');
+		});
+	};
+
+	const menuOpen = () => {
+		// open menu
+		if (blockMenu.current != null && darkBlur.current != null) {
+			toggleMenu().then(() => {
+				menuAnimOpenTl.play();
+			});
+			document.body.style.position = 'fixed';
+			setAllowScroll(false);
+		}
+	};
+
+	const menuClose = () => {
+		// close menu
+		if (blockMenu.current != null && darkBlur.current != null) {
+			menuAnimOpenTl.reverse(0.4).then(() => toggleMenu());
+			document.body.style.position = 'static';
+			setAllowScroll(true);
+			if (hamburgerToggle) setHamburgerToggle(false);
+		}
+	};
+
 	return (
 		<div className='z-10 relative'>
 			<div
 				ref={darkBlur}
-				className={`invisible backdrop-blur-md backdrop-brightness-100 bg-black/30 min-h-screen min-w-full absolute shadow-blurEdge`}
+				className={`backdrop-blur-md backdrop-brightness-100 bg-black/30 min-h-screen min-w-full absolute shadow-blurEdge`}
 			></div>
 			<div
 				ref={blockMenu}
-				className='invisible block w-screen h-fit text-center absolute top-0 bg-zinc-500 p-12'
+				className='block w-screen h-fit text-center absolute top-0 bg-transparent p-12'
+				style={{ visibility: menuState ? 'visible' : 'hidden' }}
 			>
-				<Link linkName='home' />
-				<Link linkName='about' />
-				<Link linkName='skills' />
-				<Link linkName='works' />
-				<Link linkName='contact' />
+				<div ref={link}>
+					<Link menuClose={menuClose} linkName='home' />
+					<Link menuClose={menuClose} linkName='about' />
+					<Link menuClose={menuClose} linkName='skills' />
+					<Link menuClose={menuClose} linkName='works' />
+					<Link menuClose={menuClose} linkName='contact' />
+				</div>
 			</div>
 			<nav className='w-screen h-20 flex flex-row-reverse p-4 md:hidden'>
 				<Hamburger
+					toggled={hamburgerToggle}
+					toggle={setHamburgerToggle}
 					color='white'
 					rounded
 					label='show menu'
@@ -53,21 +122,9 @@ const MobileMenu = ({ setAllowScroll }: MobileMenuProps) => {
 					hideOutline={true}
 					onToggle={(toggled) => {
 						if (toggled) {
-							// open menu
-							if (blockMenu.current != null && darkBlur.current != null) {
-								blockMenu.current.style.visibility = 'visible';
-								darkBlur.current.style.visibility = 'visible';
-								document.body.style.position = 'fixed';
-								setAllowScroll(false);
-							}
+							menuOpen();
 						} else {
-							// close menu
-							if (blockMenu.current != null && darkBlur.current != null) {
-								blockMenu.current.style.visibility = 'hidden';
-								darkBlur.current.style.visibility = 'hidden';
-								document.body.style.position = 'static';
-								setAllowScroll(true);
-							}
+							menuClose();
 						}
 					}}
 				/>
