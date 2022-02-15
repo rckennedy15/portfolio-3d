@@ -24,15 +24,16 @@ const Home: NextPage = () => {
 				anchors={anchors}
 				verticalCentered={false}
 				autoScrolling={true}
-				fixedElements='#bg'
+				fixedElements='.cv'
 				render={({ state, fullpageApi }) => {
 					if (fullpageApi !== undefined) {
 						fullpageApi.setAllowScrolling(allowScroll);
 					}
 					return (
 						<ReactFullpage.Wrapper>
+							<ThreeCv />
+
 							<div className='section bg-zinc-800'>
-								<ThreeCv />
 								<MobileMenu setAllowScroll={setAllowScroll} />
 								<Hero />
 							</div>
