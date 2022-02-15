@@ -46,7 +46,7 @@ const ThreeCv = () => {
 					<OrbitControls
 						enableZoom={false}
 						autoRotate={true}
-						autoRotateSpeed={1}
+						autoRotateSpeed={0.2}
 					/>
 					<Stars />
 					<ambientLight intensity={0.5} />
