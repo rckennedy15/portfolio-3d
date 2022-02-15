@@ -2,12 +2,17 @@ import type { NextPage } from 'next';
 import Image from 'next/image';
 import Hero from '../components/hero';
 import MobileMenu from '../components/mobile-menu';
+import About from '../components/about';
+import ThreeCv from '../components/threeCv';
+import Skills from '../components/skills';
+import Works from '../components/works';
+import Contact from '../components/contact';
 import gsap from 'gsap';
 import { useEffect, useState } from 'react';
 import ReactFullpage, { fullpageApi } from '@fullpage/react-fullpage';
 
 const Home: NextPage = () => {
-	const anchors = ['home', 'about', 'skills', 'work', 'contact'];
+	const anchors = ['home', 'about', 'skills', 'works', 'contact'];
 	const [allowScroll, setAllowScroll] = useState(true);
 
 	return (
@@ -19,22 +24,30 @@ const Home: NextPage = () => {
 				anchors={anchors}
 				verticalCentered={false}
 				autoScrolling={true}
+				fixedElements='#bg'
 				render={({ state, fullpageApi }) => {
-					if (fullpageApi != undefined) {
+					if (fullpageApi !== undefined) {
 						fullpageApi.setAllowScrolling(allowScroll);
 					}
 					return (
 						<ReactFullpage.Wrapper>
 							<div className='section bg-zinc-800'>
+								<ThreeCv />
 								<MobileMenu setAllowScroll={setAllowScroll} />
 								<Hero />
 							</div>
 							<div className='section bg-zinc-600'>
-								<p>Section 2</p>
+								<About />
 							</div>
-							<div className='section bg-cyan-700'></div>
-							<div className='section bg-zinc-600'></div>
-							<div className='section bg-zinc-900'></div>
+							<div className='section bg-cyan-700'>
+								<Skills />
+							</div>
+							<div className='section bg-zinc-600'>
+								<Works />
+							</div>
+							<div className='section bg-zinc-900'>
+								<Contact />
+							</div>
 						</ReactFullpage.Wrapper>
 					);
 				}}

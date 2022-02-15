@@ -17,52 +17,54 @@ const MobileMenu = ({ setAllowScroll }: MobileMenuProps) => {
 	const [menuState, setMenuState] = useState(false);
 
 	useEffect(() => {
-		if (blockMenu.current != null) {
+		if (blockMenu.current !== null) {
 			setHeight(blockMenu.current.clientHeight);
 		}
 	}, [height]);
 
-	if (darkBlur.current != null)
+	if (darkBlur.current !== null)
 		darkBlur.current.style.top = `${height.toString()}px`;
 
 	const menuAnimOpenTl = gsap.timeline().pause();
-	menuAnimOpenTl
-		.fromTo(
-			blockMenu.current,
-			{
-				backgroundImage:
-					'radial-gradient(circle at 90% 2rem, rgb(113, 113, 122) 0%, transparent 0%)',
-			},
-			{
-				backgroundImage:
-					'radial-gradient(circle at 90% 2rem, rgb(14, 116, 144) 100%, transparent 0%)',
-				duration: 0.4,
-			},
-			'0'
-		)
-		.fromTo(
-			link.current,
-			{
-				opacity: 0,
-			},
-			{
-				duration: 0.2,
-				opacity: 1,
-			},
-			'0.2'
-		)
-		.fromTo(
-			darkBlur.current,
-			{
-				opacity: 0,
-			},
-			{
-				opacity: 1,
-				duration: 0.4,
-			},
-			'0.2'
-		)
-		.duration(0.4);
+	useEffect(() => {
+		menuAnimOpenTl
+			.fromTo(
+				blockMenu.current,
+				{
+					backgroundImage:
+						'radial-gradient(circle at 90% 2rem, rgb(113, 113, 122) 0%, transparent 0%)',
+				},
+				{
+					backgroundImage:
+						'radial-gradient(circle at 90% 2rem, rgb(14, 116, 144) 100%, transparent 0%)',
+					duration: 0.4,
+				},
+				'0'
+			)
+			.fromTo(
+				link.current,
+				{
+					opacity: 0,
+				},
+				{
+					duration: 0.2,
+					opacity: 1,
+				},
+				'0.2'
+			)
+			.fromTo(
+				darkBlur.current,
+				{
+					opacity: 0,
+				},
+				{
+					opacity: 1,
+					duration: 0.4,
+				},
+				'0.2'
+			)
+			.duration(0.4);
+	});
 
 	const toggleMenu = () => {
 		setMenuState(!menuState);
@@ -73,7 +75,7 @@ const MobileMenu = ({ setAllowScroll }: MobileMenuProps) => {
 
 	const menuOpen = () => {
 		// open menu
-		if (blockMenu.current != null && darkBlur.current != null) {
+		if (blockMenu.current !== null && darkBlur.current !== null) {
 			toggleMenu().then(() => {
 				menuAnimOpenTl.play();
 			});
@@ -84,7 +86,7 @@ const MobileMenu = ({ setAllowScroll }: MobileMenuProps) => {
 
 	const menuClose = () => {
 		// close menu
-		if (blockMenu.current != null && darkBlur.current != null) {
+		if (blockMenu.current !== null && darkBlur.current !== null) {
 			menuAnimOpenTl.reverse(0.4).then(() => toggleMenu());
 			document.body.style.position = 'static';
 			setAllowScroll(true);

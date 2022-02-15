@@ -61,7 +61,7 @@ const Hero: FC = () => {
 		const mainTl = gsap.timeline({ repeat: -1 }).pause();
 		words.forEach((word) => {
 			let tl = gsap.timeline({ repeat: 1, yoyo: true, repeatDelay: 2 });
-			if (word == 'an ethical programmer.') {
+			if (word === 'an ethical programmer.') {
 				tl.to(text.current, {
 					duration: 1.6,
 					text: word,
