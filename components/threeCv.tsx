@@ -6,6 +6,7 @@ import {
 	useTexture,
 } from '@react-three/drei';
 import { Suspense } from 'react';
+import { RGB_ETC1_Format } from 'three';
 
 const Box = () => {
 	return (
@@ -38,8 +39,13 @@ const ThreeCv = () => {
 	return (
 		<div>
 			<Canvas
-				className='cv'
-				style={{ position: 'fixed', maxHeight: '100vh', top: 0 }}
+				className='cv bg-zinc-800'
+				style={{
+					position: 'fixed',
+					maxHeight: '100vh',
+					top: 0,
+					zIndex: -10,
+				}}
 			>
 				<Suspense fallback={null}>
 					<PerspectiveCamera position={[0, 1, 5]} makeDefault />

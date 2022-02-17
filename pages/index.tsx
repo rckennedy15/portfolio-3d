@@ -33,7 +33,7 @@ const Home: NextPage = () => {
 						<ReactFullpage.Wrapper>
 							<ThreeCv />
 
-							<div className='section bg-zinc-800'>
+							<div className='section'>
 								<MobileMenu setAllowScroll={setAllowScroll} />
 								<Hero />
 							</div>
