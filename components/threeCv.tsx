@@ -5,8 +5,8 @@ import {
 	Stars,
 	useTexture,
 } from '@react-three/drei';
-import { Suspense } from 'react';
-import { RGB_ETC1_Format } from 'three';
+import { Suspense, useEffect } from 'react';
+import useWindowDimensions from '../hooks/useWindowDimensions';
 
 const Box = () => {
 	return (
@@ -18,18 +18,24 @@ const Box = () => {
 };
 
 const Globe = () => {
-	const [colorMap, displacementMap, normalMap, roughnessMap, aoMap] =
-		useTexture([
-			'earth.jpg',
-			'brick_Displacement.jpg',
-			'brick_NormalGL.jpg',
-			'brick_Roughness.jpg',
-			'brick_AmbientOcclusion.jpg',
-		]);
+	const { height, width } = useWindowDimensions();
+	console.log(`height: ${height} width: ${width}`);
+	let globeSize = 1;
+	if (width !== null) globeSize = (width / 350) * 1.3;
+
+	const [colorMap] = useTexture(['earth.jpg']);
+	// const [colorMap, displacementMap, normalMap, roughnessMap, aoMap] =
+	// 	useTexture([
+	// 		'earth.jpg',
+	// 		'brick_Displacement.jpg',
+	// 		'brick_NormalGL.jpg',
+	// 		'brick_Roughness.jpg',
+	// 		'brick_AmbientOcclusion.jpg',
+	// 	]);
 	return (
-		<mesh position={[0, -1.5, 0]}>
-			{/* Width and height segments for displacementMap */}
-			<sphereBufferGeometry args={[1, 100, 100]} />
+		<mesh position={[0, -2.5, 0]}>
+			{/* Radius 1 = about 350px*/}
+			<sphereBufferGeometry args={[globeSize, 100, 100]} />
 			<meshStandardMaterial map={colorMap} />
 		</mesh>
 	);
