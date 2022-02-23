@@ -1,47 +1,64 @@
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import {
 	OrbitControls,
 	PerspectiveCamera,
 	Stars,
 	useTexture,
 } from '@react-three/drei';
-import { Suspense, useEffect } from 'react';
+import { Suspense, useEffect, useRef } from 'react';
 import useWindowDimensions from '../hooks/useWindowDimensions';
 
-const Box = () => {
-	return (
-		<mesh position={[0, -1.5, 0]}>
-			<boxBufferGeometry attach='geometry' />
-			<meshLambertMaterial attach='material' color='hotpink' />
-		</mesh>
-	);
-};
+import Globe from './models/globe';
+import Clouds from './models/clouds';
 
-const Globe = () => {
-	const { height, width } = useWindowDimensions();
-	console.log(`height: ${height} width: ${width}`);
-	let globeSize = 1;
-	if (width !== null) globeSize = (width / 350) * 1.3;
+// const Box = () => {
+// 	return (
+// 		<mesh position={[0, -1.5, 0]}>
+// 			<boxBufferGeometry attach='geometry' />
+// 			<meshLambertMaterial attach='material' color='hotpink' />
+// 		</mesh>
+// 	);
+// };
 
-	const [colorMap] = useTexture(['earth.jpg']);
-	// const [colorMap, displacementMap, normalMap, roughnessMap, aoMap] =
-	// 	useTexture([
-	// 		'earth.jpg',
-	// 		'brick_Displacement.jpg',
-	// 		'brick_NormalGL.jpg',
-	// 		'brick_Roughness.jpg',
-	// 		'brick_AmbientOcclusion.jpg',
-	// 	]);
-	return (
-		<mesh position={[0, -2.5, 0]}>
-			{/* Radius 1 = about 350px*/}
-			<sphereBufferGeometry args={[globeSize, 100, 100]} />
-			<meshStandardMaterial map={colorMap} />
-		</mesh>
-	);
-};
+// const Globe = () => {
+// 	const { height, width } = useWindowDimensions();
+// 	console.log(`height: ${height} width: ${width}`);
+// 	let globeSize = 1;
+// 	if (width !== null) globeSize = (width / 350) * 1.3;
+
+// 	const [colorMap] = useTexture(['earth.jpg']);
+// 	return (
+// 		<mesh position={[0, -2.5, 0]}>
+// 			{/* Radius 1 = about 350px*/}
+// 			<sphereBufferGeometry args={[globeSize, 100, 100]} />
+// 			<meshStandardMaterial map={colorMap} />
+// 		</mesh>
+// 	);
+// };
+
+const animateClouds = () => {};
 
 const ThreeCv = () => {
+	const { height, width } = useWindowDimensions();
+	console.log(`height: ${height} width: ${width}`);
+	let scalingFactor = 1;
+	if (width !== null) scalingFactor = (width / 350) * 0.18; // if width = 350, scale = 0.18
+	const clouds = useRef();
+
+	const AnimatedClouds = () => {
+		// need to useRef on actual mesh object
+		useFrame(({ clock }) => {
+			if (clouds.current === undefined) {
+				console.log('undefined');
+			} else {
+				//@ts-ignore
+				clouds.current.rotation.y = clock.getElapsedTime();
+			}
+		});
+
+		return <Clouds scale={scalingFactor} />;
+	};
+
 	return (
 		<div>
 			<Canvas
@@ -57,13 +74,14 @@ const ThreeCv = () => {
 					<PerspectiveCamera position={[0, 1, 5]} makeDefault />
 					<OrbitControls
 						enableZoom={false}
-						autoRotate={true}
+						autoRotate={false} // make sure to set back to true
 						autoRotateSpeed={0.2}
 					/>
 					<Stars />
 					<ambientLight intensity={0.5} />
 					<spotLight position={[10, 15, 10]} angle={0.3} />
-					<Globe />
+					<Globe scale={scalingFactor} />
+					<AnimatedClouds />
 				</Suspense>
 			</Canvas>
 		</div>
