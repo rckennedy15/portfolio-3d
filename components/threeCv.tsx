@@ -43,21 +43,6 @@ const ThreeCv = () => {
 	console.log(`height: ${height} width: ${width}`);
 	let scalingFactor = 1;
 	if (width !== null) scalingFactor = (width / 350) * 0.18; // if width = 350, scale = 0.18
-	const clouds = useRef();
-
-	const AnimatedClouds = () => {
-		// need to useRef on actual mesh object
-		useFrame(({ clock }) => {
-			if (clouds.current === undefined) {
-				console.log('undefined');
-			} else {
-				//@ts-ignore
-				clouds.current.rotation.y = clock.getElapsedTime();
-			}
-		});
-
-		return <Clouds scale={scalingFactor} />;
-	};
 
 	return (
 		<div>
@@ -74,14 +59,15 @@ const ThreeCv = () => {
 					<PerspectiveCamera position={[0, 1, 5]} makeDefault />
 					<OrbitControls
 						enableZoom={false}
-						autoRotate={false} // make sure to set back to true
-						autoRotateSpeed={0.2}
+						autoRotate={true}
+						autoRotateSpeed={-0.05}
 					/>
 					<Stars />
 					<ambientLight intensity={0.5} />
+					<directionalLight position={[-6, 6, 6]} intensity={0.1} />
 					<spotLight position={[10, 15, 10]} angle={0.3} />
-					<Globe scale={scalingFactor} />
-					<AnimatedClouds />
+					<Globe scale={scalingFactor} position={[0.5, -1.5, 0]} />
+					<Clouds scale={scalingFactor} position={[0.5, -1.5, 0]} />
 				</Suspense>
 			</Canvas>
 		</div>
