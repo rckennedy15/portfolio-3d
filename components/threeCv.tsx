@@ -11,38 +11,19 @@ import useWindowDimensions from '../hooks/useWindowDimensions';
 import Globe from './models/globe';
 import Clouds from './models/clouds';
 
-// const Box = () => {
-// 	return (
-// 		<mesh position={[0, -1.5, 0]}>
-// 			<boxBufferGeometry attach='geometry' />
-// 			<meshLambertMaterial attach='material' color='hotpink' />
-// 		</mesh>
-// 	);
-// };
-
-// const Globe = () => {
-// 	const { height, width } = useWindowDimensions();
-// 	console.log(`height: ${height} width: ${width}`);
-// 	let globeSize = 1;
-// 	if (width !== null) globeSize = (width / 350) * 1.3;
-
-// 	const [colorMap] = useTexture(['earth.jpg']);
-// 	return (
-// 		<mesh position={[0, -2.5, 0]}>
-// 			{/* Radius 1 = about 350px*/}
-// 			<sphereBufferGeometry args={[globeSize, 100, 100]} />
-// 			<meshStandardMaterial map={colorMap} />
-// 		</mesh>
-// 	);
-// };
-
-const animateClouds = () => {};
-
 const ThreeCv = () => {
 	const { height, width } = useWindowDimensions();
 	console.log(`height: ${height} width: ${width}`);
 	let scalingFactor = 1;
 	if (width !== null) scalingFactor = (width / 350) * 0.18; // if width = 350, scale = 0.18
+	let xPosition = 0.5;
+	if (width !== null) xPosition = (width / 350) * 0.5; // if width = 350, position = 0.5
+	let yPosition = -1.5;
+	if (width !== null && width >= 768 && height !== null) {
+		scalingFactor = (height / 350) * 0.18;
+		// xPosition = (width / 350) * 0.3;
+		yPosition = 0;
+	}
 
 	return (
 		<div>
@@ -64,10 +45,16 @@ const ThreeCv = () => {
 					/>
 					<Stars />
 					<ambientLight intensity={0.5} />
-					<directionalLight position={[-6, 6, 6]} intensity={0.1} />
-					<spotLight position={[10, 15, 10]} angle={0.3} />
-					<Globe scale={scalingFactor} position={[0.5, -1.5, 0]} />
-					<Clouds scale={scalingFactor} position={[0.5, -1.5, 0]} />
+					<directionalLight
+						position={[xPosition * -12, yPosition * -4, 6]}
+						intensity={0.1}
+					/>
+					<spotLight
+						position={[xPosition * 20, yPosition * -10, 10]}
+						angle={0.3}
+					/>
+					<Globe scale={scalingFactor} position={[xPosition, yPosition, 0]} />
+					<Clouds scale={scalingFactor} position={[xPosition, yPosition, 0]} />
 				</Suspense>
 			</Canvas>
 		</div>
