@@ -6,6 +6,12 @@ const Works = () => {
 					Works
 				</h1>
 			</div>
+			<div>
+				<p>
+					I want to make this a horizontally scrolling carousel of
+					screenshots/links to my work
+				</p>
+			</div>
 		</div>
 	);
 };
