@@ -76,6 +76,7 @@ const Hero: FC = () => {
 			}
 			mainTl.add(tl);
 		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (

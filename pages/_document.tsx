@@ -8,6 +8,7 @@ export default function Document() {
 					name='description'
 					content='Hire a Professional Freelance Web Developer. Building clean, animated, and interactive experiences with a focus on security and ethics.'
 				/>
+				<meta name='theme-color' content='rgb(39, 39, 42)' />
 				<link rel='icon' href='/favicon.ico' />
 
 				{/* Google Fonts */}
