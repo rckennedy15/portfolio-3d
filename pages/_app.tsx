@@ -33,10 +33,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 			(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
 			ym(87442287, "init", {
-				clickmap:true,
-				trackLinks:true,
-				accurateTrackBounce:true,
-				webvisor:true
+					 clickmap:true,
+					 trackLinks:true,
+					 accurateTrackBounce:true
 			});
 			`}</Script>
 
