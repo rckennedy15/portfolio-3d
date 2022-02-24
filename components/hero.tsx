@@ -80,7 +80,7 @@ const Hero: FC = () => {
 	}, []);
 
 	return (
-		<div className='px-8 py-16 z-0 md:h-full md:flex md:items-center md:flex-row'>
+		<div className='px-8 py-16 z-0 md:h-full md:flex md:items-center md:flex-row md:pl-[15%]'>
 			<div>
 				<div>
 					<h1 className='text-7xl text-white font-handwritten2 overflow-hidden'>
