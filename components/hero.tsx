@@ -93,10 +93,10 @@ const Hero: FC = () => {
 				</h1>
 			</div>
 			<div className='pt-16'>
-				<h4 className='text-3xl text-white font-mono2 overflow-hidden whitespace-nowrap text-ellipsis'>
+				<h2 className='text-3xl text-white font-mono2 overflow-hidden whitespace-nowrap text-ellipsis'>
 					<span ref={text} className='inline-block'></span>
 					<span ref={cursor}>_</span>
-				</h4>
+				</h2>
 			</div>
 		</div>
 	);
