@@ -2,7 +2,7 @@
 Based on auto-generated code from: https://github.com/pmndrs/gltfjsx
 */
 
-import * as THREE from 'three';
+import { Mesh, MeshStandardMaterial, Group } from 'three';
 import React, { useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
@@ -10,15 +10,15 @@ import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 
 type GLTFResult = GLTF & {
 	nodes: {
-		Globe: THREE.Mesh;
+		Globe: Mesh;
 	};
 	materials: {
-		Material: THREE.MeshStandardMaterial;
+		Material: MeshStandardMaterial;
 	};
 };
 
 export default function Globe(props: JSX.IntrinsicElements['group']) {
-	const group = useRef<THREE.Group>();
+	const group = useRef<Group>();
 	useFrame(({ clock }) => {
 		console.assert(
 			group !== undefined &&

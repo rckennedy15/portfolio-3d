@@ -13,7 +13,6 @@ import Clouds from './models/clouds';
 
 const ThreeCv = () => {
 	const { height, width } = useWindowDimensions();
-	console.log(`height: ${height} width: ${width}`);
 	let scalingFactor = 1;
 	if (width !== null) scalingFactor = (width / 350) * 0.18; // if width = 350, scale = 0.18
 	let xPosition = 0.5;
