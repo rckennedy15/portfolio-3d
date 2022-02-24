@@ -79,24 +79,26 @@ const Hero: FC = () => {
 	}, []);
 
 	return (
-		<div className='px-8 py-16 z-0'>
+		<div className='px-8 py-16 z-0 md:h-full md:flex md:items-center md:flex-row'>
 			<div>
-				<h1 className='text-7xl text-white font-handwritten2 overflow-hidden'>
-					<span ref={hero1} className='inline-block'>
-						Hi,
-					</span>
-				</h1>
-				<h1 className='text-7xl text-white font-handwritten2 overflow-hidden'>
-					<span ref={hero2} className='inline-block'>
-						I&apos;m Ryan
-					</span>
-				</h1>
-			</div>
-			<div className='pt-16'>
-				<h2 className='text-3xl text-white font-mono2 overflow-hidden whitespace-nowrap text-ellipsis'>
-					<span ref={text} className='inline-block'></span>
-					<span ref={cursor}>_</span>
-				</h2>
+				<div>
+					<h1 className='text-7xl text-white font-handwritten2 overflow-hidden'>
+						<span ref={hero1} className='inline-block'>
+							Hi,
+						</span>
+					</h1>
+					<h1 className='text-7xl text-white font-handwritten2 overflow-hidden'>
+						<span ref={hero2} className='inline-block'>
+							I&apos;m Ryan
+						</span>
+					</h1>
+				</div>
+				<div className='pt-16'>
+					<h2 className='text-3xl text-white font-mono2 overflow-hidden whitespace-nowrap text-ellipsis'>
+						<span ref={text} className='inline-block'></span>
+						<span ref={cursor}>_</span>
+					</h2>
+				</div>
 			</div>
 		</div>
 	);
