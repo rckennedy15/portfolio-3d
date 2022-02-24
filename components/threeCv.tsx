@@ -11,18 +11,39 @@ import useWindowDimensions from '../hooks/useWindowDimensions';
 import Globe from './models/globe';
 import Clouds from './models/clouds';
 
+import { Group } from 'three';
+
 const ThreeCv = () => {
 	const { height, width } = useWindowDimensions();
 	let scalingFactor = 1;
-	if (width !== null) scalingFactor = (width / 350) * 0.18; // if width = 350, scale = 0.18
 	let xPosition = 0.5;
-	if (width !== null) xPosition = (width / 350) * 0.5; // if width = 350, position = 0.5
-	let yPosition = -1.5;
-	if (width !== null && width >= 768 && height !== null) {
-		scalingFactor = (height / 350) * 0.18;
-		// xPosition = (width / 350) * 0.3;
-		yPosition = 0;
+	let yPosition = -0.5;
+
+	if (width !== null && height !== null) {
+		xPosition = (width / 350) * 0.4; // if width = 350, x position = 0.5
+		if (width < 768) {
+			yPosition = (height / 350) * -0.18;
+			scalingFactor = (width / 350) * 0.18; // if width = 350, scale = 0.18
+		} else {
+			yPosition = 1;
+			scalingFactor = (height / 350) * 0.16;
+		}
 	}
+
+	const AnimStars = () => {
+		const stars = useRef<Group>();
+		useFrame(({ clock }) => {
+			console.assert(
+				stars !== undefined &&
+					stars.current !== undefined &&
+					stars !== null &&
+					stars.current !== null,
+				{ group: stars }
+			);
+			stars!.current!.rotation.y = clock.getElapsedTime() / -60;
+		});
+		return <Stars ref={stars} />;
+	};
 
 	return (
 		<div>
@@ -37,12 +58,13 @@ const ThreeCv = () => {
 			>
 				<Suspense fallback={null}>
 					<PerspectiveCamera position={[0, 1, 5]} makeDefault />
-					<OrbitControls
+					{/* <OrbitControls
 						enableZoom={false}
 						autoRotate={true}
 						autoRotateSpeed={-0.05}
-					/>
-					<Stars />
+					/> */}
+					{/* <Stars /> */}
+					<AnimStars />
 					<ambientLight intensity={0.5} />
 					<directionalLight
 						position={[xPosition * -12, yPosition * -4, 6]}
