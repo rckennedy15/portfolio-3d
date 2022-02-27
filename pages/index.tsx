@@ -22,7 +22,7 @@ const Home: NextPage = () => {
 	useEffect(() => {
 		if (doneLoading) {
 			if (loadingDiv.current) {
-				const fade = gsap.timeline().pause();
+				const fade = gsap.timeline({ delay: 1 }).pause();
 				fade
 					.fromTo(
 						loadingDiv.current,
