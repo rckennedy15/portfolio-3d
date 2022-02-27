@@ -4,8 +4,16 @@ import {
 	PerspectiveCamera,
 	Stars,
 	useTexture,
+	Preload,
 } from '@react-three/drei';
-import { Suspense, useEffect, useRef } from 'react';
+import {
+	Suspense,
+	useEffect,
+	useRef,
+	Dispatch,
+	SetStateAction,
+	useState,
+} from 'react';
 import useWindowDimensions from '../hooks/useWindowDimensions';
 
 import Globe from './models/Globe';
@@ -13,8 +21,15 @@ import Clouds from './models/Clouds';
 
 import { Group } from 'three';
 
-const ThreeCv = () => {
+type ThreeCvProps = {
+	setDoneLoading: Dispatch<SetStateAction<boolean>>;
+};
+
+const ThreeCv = ({ setDoneLoading }: ThreeCvProps) => {
 	const { height, width } = useWindowDimensions();
+	const [globeDoneLoading, setGlobeDoneLoading] = useState(false);
+	const [cloudsDoneLoading, setCloudsDoneLoading] = useState(false);
+
 	let scalingFactor = 1;
 	let xPosition = 0.5;
 	let yPosition = -0.5;
@@ -45,6 +60,17 @@ const ThreeCv = () => {
 		return <Stars ref={stars} />;
 	};
 
+	useEffect(() => {
+		// will run once the canvas is done rendering
+		if (globeDoneLoading && cloudsDoneLoading) {
+			setDoneLoading(true);
+			console.log(
+				`CANVAS ACTUALLY DONE LOADING globe: ${globeDoneLoading} clouds: ${cloudsDoneLoading}`
+			);
+		}
+		console.log('CANVAS DONE LOADING');
+	}, [cloudsDoneLoading, globeDoneLoading, setDoneLoading]);
+
 	return (
 		<div>
 			<Canvas
@@ -74,8 +100,17 @@ const ThreeCv = () => {
 						position={[xPosition * 20, yPosition * -10, 10]}
 						angle={0.3}
 					/>
-					<Globe scale={scalingFactor} position={[xPosition, yPosition, 0]} />
-					<Clouds scale={scalingFactor} position={[xPosition, yPosition, 0]} />
+					<Globe
+						scale={scalingFactor}
+						position={[xPosition, yPosition, 0]}
+						setGlobeDoneLoading={setGlobeDoneLoading}
+					/>
+					<Clouds
+						scale={scalingFactor}
+						position={[xPosition, yPosition, 0]}
+						setCloudsDoneLoading={setCloudsDoneLoading}
+					/>
+					<Preload all />
 				</Suspense>
 			</Canvas>
 		</div>

@@ -41,7 +41,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 					/>
 				</div>
 			</noscript>
-
 			<Component {...pageProps} />
 		</>
 	);

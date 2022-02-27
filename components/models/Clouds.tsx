@@ -3,7 +3,7 @@ Based on auto-generated code from: https://github.com/pmndrs/gltfjsx
 */
 
 import { Mesh, MeshStandardMaterial, Group } from 'three';
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, Dispatch, SetStateAction } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
@@ -19,7 +19,16 @@ type GLTFResult = GLTF & {
 	};
 };
 
-export default function Clouds(props: JSX.IntrinsicElements['group']) {
+export default function Clouds(
+	props: JSX.IntrinsicElements['group'] & {
+		setCloudsDoneLoading: Dispatch<SetStateAction<boolean>>;
+	}
+) {
+	useEffect(() => {
+		console.log('CLOUDS DONE LOADING');
+		props.setCloudsDoneLoading(true);
+	}, [props]);
+
 	const group = useRef<Group>();
 	useFrame(({ clock }) => {
 		console.assert(

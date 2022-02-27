@@ -7,16 +7,45 @@ import ThreeCv from '../components/ThreeCv';
 import Skills from '../components/Skills';
 import Works from '../components/Works';
 import Contact from '../components/Contact';
+import LoadingScreen from 'components/LoadingScreen';
 import gsap from 'gsap';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import ReactFullpage, { fullpageApi } from '@fullpage/react-fullpage';
 
 const Home: NextPage = () => {
 	const anchors = ['home', 'about', 'skills', 'works', 'contact'];
 	const [allowScroll, setAllowScroll] = useState(true);
+	const [doneLoading, setDoneLoading] = useState(false);
+
+	const loadingDiv = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		if (doneLoading) {
+			if (loadingDiv.current) {
+				const fade = gsap.timeline().pause();
+				fade
+					.fromTo(
+						loadingDiv.current,
+						{
+							opacity: 1,
+						},
+						{
+							opacity: 0,
+							duration: 1,
+						}
+					)
+					.duration(1)
+					.play()
+					.then(() => {
+						loadingDiv.current!.style.visibility = 'hidden';
+					});
+			}
+		}
+	}, [doneLoading]);
 
 	return (
 		<>
+			<LoadingScreen ref={loadingDiv} />
 			<ReactFullpage
 				licenseKey={'GPLv3OpenSourceLicense'}
 				navigation
@@ -31,7 +60,7 @@ const Home: NextPage = () => {
 					}
 					return (
 						<ReactFullpage.Wrapper>
-							<ThreeCv />
+							<ThreeCv setDoneLoading={setDoneLoading} />
 
 							<div className='section'>
 								<MobileMenu setAllowScroll={setAllowScroll} />
