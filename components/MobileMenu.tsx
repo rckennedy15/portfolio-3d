@@ -1,7 +1,7 @@
 import { Spin as Hamburger } from 'hamburger-react';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import Link from '../components/mobile-menu-link';
+import Link from './MobileMenuLink';
 
 type MobileMenuProps = {
 	setAllowScroll: Dispatch<SetStateAction<boolean>>;

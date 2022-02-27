@@ -8,8 +8,8 @@ import {
 import { Suspense, useEffect, useRef } from 'react';
 import useWindowDimensions from '../hooks/useWindowDimensions';
 
-import Globe from './models/globe';
-import Clouds from './models/clouds';
+import Globe from './models/Globe';
+import Clouds from './models/Clouds';
 
 import { Group } from 'three';
 
