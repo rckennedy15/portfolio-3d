@@ -2,6 +2,7 @@ import { Spin as Hamburger } from 'hamburger-react';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import Link from './MobileMenuLink';
+import useWindowDimensions from 'hooks/useWindowDimensions';
 
 type MobileMenuProps = {
 	setAllowScroll: Dispatch<SetStateAction<boolean>>;
@@ -12,18 +13,21 @@ const MobileMenu = ({ setAllowScroll }: MobileMenuProps) => {
 	const darkBlur = useRef<HTMLDivElement>(null);
 	const link = useRef<HTMLDivElement>(null);
 
-	const [height, setHeight] = useState(0);
+	const [menuHeight, setMenuHeight] = useState(0);
 	const [hamburgerToggle, setHamburgerToggle] = useState(false);
 	const [menuState, setMenuState] = useState(false);
+	const { width, height } = useWindowDimensions();
 
 	useEffect(() => {
 		if (blockMenu.current !== null) {
-			setHeight(blockMenu.current.clientHeight);
+			setMenuHeight(blockMenu.current.clientHeight);
 		}
-	}, [height]);
+	}, [menuHeight]);
 
-	if (darkBlur.current !== null)
-		darkBlur.current.style.top = `${height.toString()}px`;
+	if (darkBlur.current !== null && height !== null) {
+		darkBlur.current.style.top = `${menuHeight.toString()}px`;
+		darkBlur.current.style.height = `${height - menuHeight}px`;
+	}
 
 	const menuAnimOpenTl = gsap.timeline().pause();
 	useEffect(() => {
@@ -98,7 +102,8 @@ const MobileMenu = ({ setAllowScroll }: MobileMenuProps) => {
 		<div className='z-10 relative'>
 			<div
 				ref={darkBlur}
-				className={`backdrop-blur-md backdrop-brightness-100 bg-black/30 min-h-screen min-w-full absolute shadow-blurEdge`}
+				className={`backdrop-blur-md backdrop-brightness-100 bg-black/30 min-w-full absolute shadow-blurEdge`}
+				style={{ visibility: menuState ? 'visible' : 'hidden' }}
 			></div>
 			<div
 				ref={blockMenu}
