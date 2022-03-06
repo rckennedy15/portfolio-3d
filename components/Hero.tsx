@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { TextPlugin } from 'gsap/dist/TextPlugin';
 
-const Hero: FC = () => {
+const Hero = ({ doneLoading }: { doneLoading: boolean }) => {
 	gsap.registerPlugin(TextPlugin);
 	const cursor = useRef<HTMLHeadingElement>(null);
 	const text = useRef<HTMLHeadingElement>(null);
@@ -19,43 +19,49 @@ const Hero: FC = () => {
 	];
 
 	useEffect(() => {
+		console.log(`hero useeffect called doneLoading: ${doneLoading}`);
+		if (doneLoading) {
+			// on load animation
+			const initTl = gsap.timeline();
+			initTl
+				.delay(2)
+				.fromTo(
+					hero1.current,
+					{
+						y: '4.5rem',
+					},
+					{
+						duration: 1,
+						y: '0rem',
+						ease: 'power3.out',
+					}
+				)
+				.fromTo(
+					hero2.current,
+					{
+						y: '4.5rem',
+					},
+					{
+						duration: 1,
+						y: '0rem',
+						ease: 'power3.out',
+						// @ts-ignore
+						onComplete: () => {
+							mainTl.play();
+							cursorTl.play();
+						},
+					}
+				);
+			initTl.play();
+		}
+
 		// cursor effect
-		gsap.to(cursor.current, {
+		const cursorTl = gsap.timeline({ repeat: -1 }).pause();
+		cursorTl.to(cursor.current, {
 			opacity: 0,
 			ease: 'power4.inOut',
-			repeat: -1,
 			duration: 0.9,
 		});
-
-		// on load animation
-		const initTl = gsap.timeline();
-		initTl
-			.delay(1)
-			.fromTo(
-				hero1.current,
-				{
-					y: '4.5rem',
-				},
-				{
-					duration: 1,
-					y: '0rem',
-					ease: 'power3.out',
-				}
-			)
-			.fromTo(
-				hero2.current,
-				{
-					y: '4.5rem',
-				},
-				{
-					duration: 1,
-					y: '0rem',
-					ease: 'power3.out',
-					// @ts-ignore
-					onComplete: () => mainTl.play(),
-				}
-			);
-		initTl.play();
 
 		// typing animation
 		const mainTl = gsap.timeline({ repeat: -1 }).pause();
@@ -76,8 +82,7 @@ const Hero: FC = () => {
 			}
 			mainTl.add(tl);
 		});
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [doneLoading]);
 
 	return (
 		<div className='px-8 py-16 z-0 md:h-full md:flex md:items-center md:flex-row md:pl-[15%]'>
@@ -97,7 +102,9 @@ const Hero: FC = () => {
 				<div className='pt-16'>
 					<h2 className='text-3xl text-white font-mono2 overflow-hidden whitespace-nowrap text-ellipsis'>
 						<span ref={text} className='inline-block'></span>
-						<span ref={cursor}>_</span>
+						<span ref={cursor} className='opacity-0'>
+							_
+						</span>
 					</h2>
 				</div>
 			</div>

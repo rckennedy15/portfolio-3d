@@ -64,7 +64,7 @@ const Home: NextPage = () => {
 
 							<div className='section'>
 								<MobileMenu setAllowScroll={setAllowScroll} />
-								<Hero />
+								<Hero doneLoading={doneLoading} />
 							</div>
 							<div className='section bg-zinc-800'>
 								<About />
