@@ -2,11 +2,11 @@ const About = () => {
 	return (
 		<div className='px-8 py-16'>
 			<div>
-				<h1 className='text-7xl text-white font-handwritten2 overflow-hidden'>
+				<h1 className='text-7xl text-white text-center font-handwritten2 overflow-hidden'>
 					About Me
 				</h1>
 			</div>
-			<div className='text-white text-xl pt-6'>
+			<div className='text-white text-base text-center py-6 px-8'>
 				<p>
 					I&apos;m a 21 year old full stack Web developer with a Bachelor&apos;s
 					degree in Political Science and Computer Science, and have won several
@@ -19,7 +19,7 @@ const About = () => {
 					Also, I love writing and producing music, 3d modeling, playing with my
 					cats, and traveling.
 				</p>
-				<p>Fun fact: I&apos;ve been to 42 US states!</p>
+				<p className='pt-4'>Fun fact: I&apos;ve been to 42 US states!</p>
 			</div>
 		</div>
 	);

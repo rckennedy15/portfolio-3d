@@ -66,7 +66,7 @@ const Home: NextPage = () => {
 								<MobileMenu setAllowScroll={setAllowScroll} />
 								<Hero />
 							</div>
-							<div className='section bg-zinc-600'>
+							<div className='section bg-zinc-800'>
 								<About />
 							</div>
 							<div className='section bg-cyan-700'>
