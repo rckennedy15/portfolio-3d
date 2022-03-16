@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 const Home: NextPage = () => {
 	const calculateTimeLeft = () => {
 		let year = new Date().getFullYear();
-		let difference = +new Date(`3/16/${year}`) - +new Date();
+		let difference = +new Date(`4/1/${year}`) - +new Date();
 
 		let timeLeft: {
 			days: number;
