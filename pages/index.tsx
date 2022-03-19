@@ -6,7 +6,7 @@ import About from '../components/About';
 import ThreeCv from '../components/ThreeCv';
 import Skills from '../components/Skills';
 import Works from '../components/Works';
-import Contact from '../components/Contact';
+import Contact from '../components/Contact/Contact';
 import LoadingScreen from 'components/LoadingScreen';
 import gsap from 'gsap';
 import { useEffect, useState, useRef } from 'react';
@@ -75,7 +75,7 @@ const Home: NextPage = () => {
 							<div className='section bg-zinc-600'>
 								<Works />
 							</div>
-							<div className='section bg-zinc-900'>
+							<div className='section bg-cyan-100'>
 								<Contact />
 							</div>
 						</ReactFullpage.Wrapper>
