@@ -48,7 +48,7 @@ export default function Document() {
 					crossOrigin='true'
 				/>
 				<link
-					href='https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Indie+Flower&family=M+PLUS+Rounded+1c:wght@300&family=Raleway:wght@300&family=Ubuntu+Mono&display=swap'
+					href='https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Indie+Flower&family=M+PLUS+Rounded+1c:wght@300&family=Raleway:wght@300&family=Ubuntu+Mono&family=Nunito:wght@200&family=Fira+Code:wght@300&display=swap'
 					rel='stylesheet'
 				/>
 			</Head>

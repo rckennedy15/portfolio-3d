@@ -74,7 +74,7 @@ const ThreeCv = ({ setDoneLoading }: ThreeCvProps) => {
 	return (
 		<div>
 			<Canvas
-				className='cv bg-zinc-800'
+				className='cv bg-tertiary bg-gradient-to-br from-secondary to-cta'
 				style={{
 					position: 'fixed',
 					maxHeight: '100vh',
@@ -89,8 +89,9 @@ const ThreeCv = ({ setDoneLoading }: ThreeCvProps) => {
 						autoRotate={true}
 						autoRotateSpeed={-0.05}
 					/> */}
-					{/* <Stars /> */}
-					<AnimStars />
+					{/* Star color is too dark to work well with new color scheme.
+					Maybe add a sun model and some other planets/asteroids? */}
+					{/* <AnimStars /> */}
 					<ambientLight intensity={0.5} />
 					<directionalLight
 						position={[xPosition * -12, yPosition * -4, 6]}

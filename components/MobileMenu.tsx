@@ -40,7 +40,7 @@ const MobileMenu = ({ setAllowScroll }: MobileMenuProps) => {
 				},
 				{
 					backgroundImage:
-						'radial-gradient(circle at 90% 2rem, rgb(14, 116, 144) 100%, transparent 0%)',
+						'radial-gradient(circle at 90% 2rem, #00D4F4 100%, transparent 0%)',
 					duration: 0.4,
 				},
 				'0'
