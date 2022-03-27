@@ -19,7 +19,7 @@ import useWindowDimensions from '../hooks/useWindowDimensions';
 import Globe from './models/Globe';
 import Clouds from './models/Clouds';
 
-import { Group } from 'three';
+import { Group, HemisphereLight, Object3D } from 'three';
 
 type ThreeCvProps = {
 	setDoneLoading: Dispatch<SetStateAction<boolean>>;
@@ -71,6 +71,7 @@ const ThreeCv = ({ setDoneLoading }: ThreeCvProps) => {
 		console.log('CANVAS DONE LOADING');
 	}, [cloudsDoneLoading, globeDoneLoading, setDoneLoading]);
 
+	const globe = useRef<Object3D>();
 	return (
 		<div>
 			<Canvas
@@ -92,16 +93,20 @@ const ThreeCv = ({ setDoneLoading }: ThreeCvProps) => {
 					{/* Star color is too dark to work well with new color scheme.
 					Maybe add a sun model and some other planets/asteroids? */}
 					{/* <AnimStars /> */}
-					<ambientLight intensity={0.5} />
+					<ambientLight intensity={0.2} />
 					<directionalLight
-						position={[xPosition * -12, yPosition * -4, 6]}
-						intensity={0.1}
+						target={globe.current}
+						position={[xPosition - 10, yPosition + 10, 10]}
+						intensity={1.5}
 					/>
-					<spotLight
+
+					{/* <hemisphereLight intensity={1} /> */}
+					{/* <spotLight
 						position={[xPosition * 20, yPosition * -10, 10]}
 						angle={0.3}
-					/>
+					/> */}
 					<Globe
+						ref={globe}
 						scale={scalingFactor}
 						position={[xPosition, yPosition, 0]}
 						setGlobeDoneLoading={setGlobeDoneLoading}

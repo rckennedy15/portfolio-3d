@@ -47,7 +47,7 @@ export default function Clouds(
 				castShadow
 				receiveShadow
 				geometry={nodes.Cloud.geometry}
-				material={nodes.Cloud.material}
+				material={new MeshStandardMaterial({ color: '#ffffff' })}
 				position={[0.24735296, -0.72191346, 6.21215582]}
 				rotation={[-0.00571064, 0.22987353, 0.01382149]}
 				scale={0.6781491}
@@ -57,7 +57,7 @@ export default function Clouds(
 				castShadow
 				receiveShadow
 				geometry={nodes.Cloud001.geometry}
-				material={nodes.Cloud001.material}
+				material={new MeshStandardMaterial({ color: '#ffffff' })}
 				position={[-6.17658138, 0.82611781, -3.03061295]}
 				rotation={[-2.37230829, 0.55652151, 1.5599999]}
 				scale={0.6781491}
@@ -67,7 +67,7 @@ export default function Clouds(
 				castShadow
 				receiveShadow
 				geometry={nodes.Cloud002.geometry}
-				material={nodes.Cloud002.material}
+				material={new MeshStandardMaterial({ color: '#ffffff' })}
 				position={[5.45620537, 3.57279372, -1.86408091]}
 				rotation={[-1.42299119, 0.35910588, -1.32985327]}
 				scale={0.6781491}
