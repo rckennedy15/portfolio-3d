@@ -10,10 +10,8 @@ import Contact from '../components/Contact/Contact';
 import LoadingScreen from 'components/LoadingScreen';
 import gsap from 'gsap';
 import { useEffect, useState, useRef } from 'react';
-import ReactFullpage, { fullpageApi } from '@fullpage/react-fullpage';
 
 const Home: NextPage = () => {
-	const anchors = ['home', 'about', 'skills', 'works', 'contact'];
 	const [allowScroll, setAllowScroll] = useState(true);
 	const [doneLoading, setDoneLoading] = useState(false);
 
@@ -46,42 +44,26 @@ const Home: NextPage = () => {
 	return (
 		<>
 			<LoadingScreen ref={loadingDiv} />
-			<ReactFullpage
-				licenseKey={'GPLv3OpenSourceLicense'}
-				navigation
-				navigationTooltips={anchors}
-				anchors={anchors}
-				verticalCentered={false}
-				autoScrolling={true}
-				fixedElements='.cv'
-				render={({ state, fullpageApi }) => {
-					if (fullpageApi !== undefined) {
-						fullpageApi.setAllowScrolling(allowScroll);
-					}
-					return (
-						<ReactFullpage.Wrapper>
-							<ThreeCv setDoneLoading={setDoneLoading} />
+			<div className='snap-mandatory snap-y scroll-smooth overflow-scroll h-screen'>
+				<ThreeCv setDoneLoading={setDoneLoading} />
 
-							<div className='section'>
-								<MobileMenu setAllowScroll={setAllowScroll} />
-								<Hero doneLoading={doneLoading} />
-							</div>
-							<div className='section bg-zinc-800'>
-								<About />
-							</div>
-							<div className='section bg-cyan-700'>
-								<Skills />
-							</div>
-							<div className='section bg-zinc-600'>
-								<Works />
-							</div>
-							<div className='section bg-cyan-100'>
-								<Contact />
-							</div>
-						</ReactFullpage.Wrapper>
-					);
-				}}
-			/>
+				<div className='h-screen snap-start'>
+					<MobileMenu setAllowScroll={setAllowScroll} />
+					<Hero doneLoading={doneLoading} />
+				</div>
+				<div className='min-h-screen snap-start bg-zinc-800/10 backdrop-blur-lg'>
+					<About />
+				</div>
+				<div className='min-h-screen snap-start bg-cyan-700'>
+					<Skills />
+				</div>
+				<div className='min-h-screen snap-start bg-zinc-600'>
+					<Works />
+				</div>
+				<div className='min-h-screen snap-start bg-cyan-100'>
+					<Contact />
+				</div>
+			</div>
 		</>
 	);
 };
